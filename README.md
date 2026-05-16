@@ -2,7 +2,7 @@
 
 A full-stack AI-powered mock interview platform with voice input, real-time AI feedback, behavioral + DSA questions, and performance analytics.
 
-live link - ai-interview-opal-delta.vercel.app
+live link - https://ai-interview-opal-delta.vercel.app/
 
 ## Tech Stack
 
