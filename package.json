@@ -1,0 +1,8 @@
+{
+  "name": "ai-interview-platform",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd server && npm install && npx tsc --skipLibCheck",
+    "start": "cd server && node dist/index.js"
+  }
+}
