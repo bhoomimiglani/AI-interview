@@ -52,29 +52,29 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5 mb-6">
-            <div className="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
               <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-white text-lg">AI Interview Prep</span>
+            <span className="font-bold text-slate-900 text-lg">AI Interview Prep</span>
           </Link>
-          <h1 className="text-2xl font-bold text-white">Create your account</h1>
-          <p className="text-gray-400 mt-1">Start practicing for free today</p>
+          <h1 className="text-2xl font-bold text-slate-900">Create your account</h1>
+          <p className="text-slate-500 mt-1">Start practicing for free today</p>
         </div>
 
         <div className="card">
           {error && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 mb-4 text-sm text-red-400">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-sm text-red-600">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">Full Name</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Full Name</label>
               <input
                 type="text" className="input" placeholder="John Doe"
                 value={form.name}
@@ -84,7 +84,7 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
               <input
                 type="email" className="input" placeholder="you@example.com"
                 value={form.email}
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">Password</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -103,7 +103,7 @@ export default function RegisterPage() {
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   required minLength={6}
                 />
-                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                   onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -112,7 +112,7 @@ export default function RegisterPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">Target Role</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Target Role</label>
                 <input
                   type="text" className="input" placeholder="Software Engineer"
                   value={form.targetRole}
@@ -120,7 +120,7 @@ export default function RegisterPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">Experience</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Experience</label>
                 <select
                   className="input"
                   value={form.experience}
@@ -132,7 +132,7 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">Skills (optional)</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Skills (optional)</label>
               <div className="flex gap-2">
                 <input
                   type="text" className="input flex-1" placeholder="e.g. React, Python"
@@ -145,7 +145,7 @@ export default function RegisterPage() {
               {form.skills.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {form.skills.map((skill) => (
-                    <span key={skill} className="badge bg-primary-600/20 text-primary-300 border border-primary-500/30 flex items-center gap-1">
+                    <span key={skill} className="badge bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1">
                       {skill}
                       <button type="button" onClick={() => removeSkill(skill)}>
                         <X size={10} />
@@ -161,9 +161,9 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-slate-500 mt-4">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary-400 hover:text-primary-300 font-medium">Sign in</Link>
+            <Link to="/login" className="text-indigo-600 hover:text-indigo-700 font-medium">Sign in</Link>
           </p>
         </div>
       </div>

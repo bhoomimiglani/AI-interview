@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { interviewAPI } from '../services/api';
 import { Interview } from '../types';
-import { Mic, Clock, ChevronRight, Loader2, Filter, Trophy } from 'lucide-react';
+import { Mic, Clock, ChevronRight, Loader2, Filter } from 'lucide-react';
 
 export default function HistoryPage() {
   const [interviews, setInterviews] = useState<Interview[]>([]);
@@ -29,15 +29,15 @@ export default function HistoryPage() {
   useEffect(() => { fetchInterviews(); }, [page, filter]);
 
   const scoreColor = (s?: number) => {
-    if (!s) return 'text-gray-500';
-    return s >= 70 ? 'text-green-400' : s >= 50 ? 'text-yellow-400' : 'text-red-400';
+    if (!s) return 'text-slate-400';
+    return s >= 70 ? 'text-green-600' : s >= 50 ? 'text-amber-600' : 'text-red-600';
   };
 
   const typeColors: Record<string, string> = {
-    behavioral: 'bg-blue-500/10 text-blue-400',
-    dsa: 'bg-green-500/10 text-green-400',
-    'system-design': 'bg-purple-500/10 text-purple-400',
-    mixed: 'bg-primary-500/10 text-primary-400',
+    behavioral: 'bg-blue-100 text-blue-700',
+    dsa: 'bg-green-100 text-green-700',
+    'system-design': 'bg-purple-100 text-purple-700',
+    mixed: 'bg-indigo-100 text-indigo-700',
   };
 
   const formatDuration = (s: number) => {
@@ -50,8 +50,8 @@ export default function HistoryPage() {
     <div className="p-6 max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-white">Interview History</h1>
-          <p className="text-gray-400 mt-1">Review your past sessions and feedback</p>
+          <h1 className="text-2xl font-bold text-slate-900">Interview History</h1>
+          <p className="text-slate-500 mt-1">Review your past sessions and feedback</p>
         </div>
         <Link to="/interview/setup" className="btn-primary flex items-center gap-2 text-sm">
           <Mic size={14} />
@@ -61,7 +61,7 @@ export default function HistoryPage() {
 
       {/* Filters */}
       <div className="flex gap-3 mb-6 flex-wrap">
-        <div className="flex items-center gap-2 text-sm text-gray-400">
+        <div className="flex items-center gap-2 text-sm text-slate-500">
           <Filter size={14} />
           Filter:
         </div>
@@ -71,8 +71,8 @@ export default function HistoryPage() {
             onClick={() => { setFilter({ ...filter, status: s }); setPage(1); }}
             className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
               filter.status === s
-                ? 'bg-primary-600/20 text-primary-400 border border-primary-500/30'
-                : 'bg-gray-800 text-gray-400 hover:text-white border border-gray-700'
+                ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                : 'bg-white text-slate-500 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
             }`}
           >
             {s || 'All'}
@@ -82,12 +82,12 @@ export default function HistoryPage() {
 
       {loading ? (
         <div className="flex items-center justify-center h-48">
-          <Loader2 className="w-8 h-8 animate-spin text-primary-400" />
+          <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
         </div>
       ) : interviews.length === 0 ? (
         <div className="card text-center py-12">
-          <Mic size={40} className="mx-auto mb-4 text-gray-700" />
-          <p className="text-gray-400 mb-4">No interviews found</p>
+          <Mic size={40} className="mx-auto mb-4 text-slate-300" />
+          <p className="text-slate-500 mb-4">No interviews found</p>
           <Link to="/interview/setup" className="btn-primary inline-flex items-center gap-2 text-sm">
             Start Your First Interview
           </Link>
@@ -98,27 +98,27 @@ export default function HistoryPage() {
             <Link
               key={interview._id}
               to={interview.status === 'completed' ? `/interview/${interview._id}/results` : `/interview/${interview._id}`}
-              className="card hover:border-gray-700 transition-all flex items-center gap-4 group"
+              className="card hover:border-indigo-200 hover:shadow-md transition-all flex items-center gap-4 group"
             >
-              <div className="w-10 h-10 bg-primary-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Mic size={16} className="text-primary-400" />
+              <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Mic size={16} className="text-indigo-600" />
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className={`badge text-xs ${typeColors[interview.type] || 'bg-gray-800 text-gray-400'}`}>
+                  <span className={`badge text-xs ${typeColors[interview.type] || 'bg-slate-100 text-slate-600'}`}>
                     {interview.type}
                   </span>
                   <span className={`badge text-xs ${
-                    interview.status === 'completed' ? 'bg-green-500/10 text-green-400' :
-                    interview.status === 'in-progress' ? 'bg-yellow-500/10 text-yellow-400' :
-                    'bg-gray-800 text-gray-500'
+                    interview.status === 'completed' ? 'bg-green-100 text-green-700' :
+                    interview.status === 'in-progress' ? 'bg-amber-100 text-amber-700' :
+                    'bg-slate-100 text-slate-500'
                   }`}>
                     {interview.status}
                   </span>
                 </div>
-                <p className="text-sm text-white font-medium truncate">{interview.title}</p>
-                <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
+                <p className="text-sm text-slate-900 font-medium truncate">{interview.title}</p>
+                <div className="flex items-center gap-3 mt-1 text-xs text-slate-400">
                   <span className="flex items-center gap-1">
                     <Clock size={10} />
                     {formatDuration(interview.duration)}
@@ -134,10 +134,10 @@ export default function HistoryPage() {
                     <div className={`text-xl font-bold ${scoreColor(interview.overallScore)}`}>
                       {interview.overallScore || 0}
                     </div>
-                    <div className="text-xs text-gray-600">score</div>
+                    <div className="text-xs text-slate-400">score</div>
                   </div>
                 )}
-                <ChevronRight size={16} className="text-gray-600 group-hover:text-gray-400 transition-colors" />
+                <ChevronRight size={16} className="text-slate-300 group-hover:text-slate-500 transition-colors" />
               </div>
             </Link>
           ))}
@@ -154,7 +154,7 @@ export default function HistoryPage() {
           >
             Previous
           </button>
-          <span className="text-sm text-gray-400">Page {page} of {totalPages}</span>
+          <span className="text-sm text-slate-500">Page {page} of {totalPages}</span>
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}

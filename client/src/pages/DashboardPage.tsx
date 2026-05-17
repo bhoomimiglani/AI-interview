@@ -49,12 +49,12 @@ export default function DashboardPage() {
   if (loading)
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-primary-400" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
 
   const scoreColor = (s: number) =>
-    s >= 70 ? 'text-green-400' : s >= 50 ? 'text-yellow-400' : 'text-red-400';
+    s >= 70 ? 'text-green-600' : s >= 50 ? 'text-amber-600' : 'text-red-600';
 
   const currentStreak = user?.currentStreak ?? 0;
   const dailyGoal = user?.dailyGoal ?? 10;
@@ -85,16 +85,16 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-slate-900">
             Welcome back, {user?.name?.split(' ')[0]} 👋
           </h1>
-          <p className="text-gray-400 mt-1">{getMotivationalMessage()}</p>
+          <p className="text-slate-500 mt-1">{getMotivationalMessage()}</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={handleChallengeStart}
             disabled={challengeLoading}
-            className="flex items-center gap-2 px-4 py-2 bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 text-orange-400 rounded-xl text-sm font-medium transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-600 rounded-xl text-sm font-medium transition-all"
           >
             {challengeLoading ? (
               <Loader2 size={14} className="animate-spin" />
@@ -112,9 +112,9 @@ export default function DashboardPage() {
 
       {/* Streak at risk warning */}
       {streakAtRisk && (
-        <div className="mb-4 p-3 bg-orange-500/10 border border-orange-500/30 rounded-xl flex items-center gap-2">
-          <Flame size={16} className="text-orange-400" />
-          <p className="text-sm text-orange-300">
+        <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-xl flex items-center gap-2">
+          <Flame size={16} className="text-orange-500" />
+          <p className="text-sm text-orange-700">
             Your {currentStreak}-day streak is at risk! Practice today to keep it going. 🔥
           </p>
         </div>
@@ -125,13 +125,13 @@ export default function DashboardPage() {
         {/* Streak */}
         <div className="card">
           <div className="flex items-center gap-2 mb-2">
-            <Flame size={18} className="text-orange-400" />
-            <span className="text-sm text-gray-400">Streak</span>
+            <Flame size={18} className="text-orange-500" />
+            <span className="text-sm text-slate-500">Streak</span>
           </div>
-          <div className="text-2xl font-bold text-white flex items-center gap-1">
+          <div className="text-2xl font-bold text-slate-900 flex items-center gap-1">
             {currentStreak} 🔥
           </div>
-          <div className="text-xs text-gray-500 mt-0.5">
+          <div className="text-xs text-slate-400 mt-0.5">
             Best: {user?.longestStreak ?? 0} days
           </div>
         </div>
@@ -139,44 +139,44 @@ export default function DashboardPage() {
         {/* Badges */}
         <div className="card">
           <div className="flex items-center gap-2 mb-2">
-            <Trophy size={18} className="text-yellow-400" />
-            <span className="text-sm text-gray-400">Badges</span>
+            <Trophy size={18} className="text-amber-500" />
+            <span className="text-sm text-slate-500">Badges</span>
           </div>
-          <div className="text-2xl font-bold text-white">{earnedBadges.length}</div>
-          <div className="text-xs text-gray-500 mt-0.5">of {BADGE_DEFINITIONS.length} total</div>
+          <div className="text-2xl font-bold text-slate-900">{earnedBadges.length}</div>
+          <div className="text-xs text-slate-400 mt-0.5">of {BADGE_DEFINITIONS.length} total</div>
         </div>
 
         {/* Avg Score */}
         <div className="card">
           <div className="flex items-center gap-2 mb-2">
-            <Star size={18} className="text-primary-400" />
-            <span className="text-sm text-gray-400">Avg Score</span>
+            <Star size={18} className="text-indigo-500" />
+            <span className="text-sm text-slate-500">Avg Score</span>
           </div>
           <div className={`text-2xl font-bold ${scoreColor(stats?.averageScore ?? 0)}`}>
             {stats?.averageScore ?? 0}%
           </div>
-          <div className="text-xs text-gray-500 mt-0.5">{stats?.completedInterviews ?? 0} completed</div>
+          <div className="text-xs text-slate-400 mt-0.5">{stats?.completedInterviews ?? 0} completed</div>
         </div>
 
         {/* Daily Goal */}
         <div className="card">
           <div className="flex items-center gap-2 mb-2">
-            <Target size={18} className="text-green-400" />
-            <span className="text-sm text-gray-400">Daily Goal</span>
+            <Target size={18} className="text-green-600" />
+            <span className="text-sm text-slate-500">Daily Goal</span>
           </div>
-          <div className="text-sm font-semibold text-white mb-1.5">
+          <div className="text-sm font-semibold text-slate-900 mb-1.5">
             {questionsToday}/{dailyGoal} questions
           </div>
-          <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-700 ${
-                dailyProgress >= 100 ? 'bg-green-500' : 'bg-primary-500'
+                dailyProgress >= 100 ? 'bg-green-500' : 'bg-indigo-500'
               }`}
               style={{ width: `${dailyProgress}%` }}
             />
           </div>
           {dailyProgress >= 100 && (
-            <div className="text-xs text-green-400 mt-1">Goal reached! 🎉</div>
+            <div className="text-xs text-green-600 mt-1">Goal reached! 🎉</div>
           )}
         </div>
       </div>
@@ -185,11 +185,11 @@ export default function DashboardPage() {
       {recentBadges.length > 0 && (
         <div className="card mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <Trophy size={16} className="text-yellow-400" />
+            <h2 className="font-semibold text-slate-900 flex items-center gap-2">
+              <Trophy size={16} className="text-amber-500" />
               Recent Badges
             </h2>
-            <Link to="/profile" className="text-sm text-primary-400 hover:text-primary-300 flex items-center gap-1">
+            <Link to="/profile" className="text-sm text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
               View all <ArrowRight size={14} />
             </Link>
           </div>
@@ -200,12 +200,12 @@ export default function DashboardPage() {
               return (
                 <div
                   key={badge.id}
-                  className="flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-3 py-2"
+                  className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2"
                 >
                   <span className="text-lg">{def.emoji}</span>
                   <div>
-                    <p className="text-xs font-semibold text-white">{def.name}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs font-semibold text-slate-900">{def.name}</p>
+                    <p className="text-xs text-slate-400">
                       {new Date(badge.earnedAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -219,37 +219,37 @@ export default function DashboardPage() {
       <div className="grid lg:grid-cols-3 gap-6 mb-6">
         {/* Score trend */}
         <div className="card lg:col-span-2">
-          <h2 className="font-semibold text-white mb-4 flex items-center gap-2">
-            <BarChart3 size={16} className="text-primary-400" />
+          <h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <BarChart3 size={16} className="text-indigo-500" />
             Score Trend
           </h2>
           {stats?.scoreTrend && stats.scoreTrend.length > 0 ? (
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={stats.scoreTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-                <XAxis dataKey="session" tick={{ fill: '#6b7280', fontSize: 11 }} />
-                <YAxis domain={[0, 100]} tick={{ fill: '#6b7280', fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="session" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#111827',
-                    border: '1px solid #374151',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 8,
                   }}
-                  labelStyle={{ color: '#9ca3af' }}
-                  itemStyle={{ color: '#818cf8' }}
+                  labelStyle={{ color: '#64748b' }}
+                  itemStyle={{ color: '#4f46e5' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="score"
-                  stroke="#6366f1"
+                  stroke="#4f46e5"
                   strokeWidth={2.5}
-                  dot={{ fill: '#6366f1', r: 4 }}
+                  dot={{ fill: '#4f46e5', r: 4 }}
                   activeDot={{ r: 6 }}
                 />
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-48 flex items-center justify-center text-gray-600">
+            <div className="h-48 flex items-center justify-center text-slate-400">
               <div className="text-center">
                 <BarChart3 size={32} className="mx-auto mb-2 opacity-30" />
                 <p className="text-sm">Complete interviews to see your trend</p>
@@ -260,29 +260,29 @@ export default function DashboardPage() {
 
         {/* 7-day activity */}
         <div className="card">
-          <h2 className="font-semibold text-white mb-4 flex items-center gap-2">
-            <TrendingUp size={16} className="text-green-400" />
+          <h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <TrendingUp size={16} className="text-green-600" />
             Last 7 Days
           </h2>
           {stats?.last7Days && stats.last7Days.some((d) => d.count > 0) ? (
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={stats.last7Days}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-                <XAxis dataKey="date" tick={{ fill: '#6b7280', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#6b7280', fontSize: 10 }} allowDecimals={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="date" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} allowDecimals={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#111827',
-                    border: '1px solid #374151',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 8,
                   }}
-                  itemStyle={{ color: '#22c55e' }}
+                  itemStyle={{ color: '#16a34a' }}
                 />
-                <Bar dataKey="count" fill="#22c55e" radius={[4, 4, 0, 0]} name="Sessions" />
+                <Bar dataKey="count" fill="#16a34a" radius={[4, 4, 0, 0]} name="Sessions" />
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-48 flex items-center justify-center text-gray-600 text-sm">
+            <div className="h-48 flex items-center justify-center text-slate-400 text-sm">
               No activity this week
             </div>
           )}
@@ -292,21 +292,21 @@ export default function DashboardPage() {
       {/* Performance by type */}
       {stats?.typePerformance && stats.typePerformance.length > 0 && (
         <div className="card mb-6">
-          <h2 className="font-semibold text-white mb-4">Performance by Interview Type</h2>
+          <h2 className="font-semibold text-slate-900 mb-4">Performance by Interview Type</h2>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={stats.typePerformance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-              <XAxis dataKey="type" tick={{ fill: '#6b7280', fontSize: 12 }} />
-              <YAxis domain={[0, 100]} tick={{ fill: '#6b7280', fontSize: 12 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="type" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+              <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 12 }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#111827',
-                  border: '1px solid #374151',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #e2e8f0',
                   borderRadius: 8,
                 }}
-                itemStyle={{ color: '#818cf8' }}
+                itemStyle={{ color: '#4f46e5' }}
               />
-              <Bar dataKey="avgScore" fill="#6366f1" radius={[6, 6, 0, 0]} name="Avg Score" />
+              <Bar dataKey="avgScore" fill="#4f46e5" radius={[6, 6, 0, 0]} name="Avg Score" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -315,10 +315,10 @@ export default function DashboardPage() {
       {/* Recent interviews */}
       <div className="card">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-white">Recent Interviews</h2>
+          <h2 className="font-semibold text-slate-900">Recent Interviews</h2>
           <Link
             to="/history"
-            className="text-sm text-primary-400 hover:text-primary-300 flex items-center gap-1"
+            className="text-sm text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
           >
             View all <ArrowRight size={14} />
           </Link>
@@ -329,17 +329,17 @@ export default function DashboardPage() {
               <Link
                 key={interview._id}
                 to={`/interview/${interview._id}/results`}
-                className="flex items-center justify-between p-3 bg-gray-800/50 rounded-xl hover:bg-gray-800 transition-colors"
+                className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-primary-600/20 rounded-lg flex items-center justify-center">
-                    <Mic size={14} className="text-primary-400" />
+                  <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center">
+                    <Mic size={14} className="text-indigo-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white capitalize">
+                    <p className="text-sm font-medium text-slate-900 capitalize">
                       {interview.type.replace('-', ' ')} Interview
                     </p>
-                    <p className="text-xs text-gray-500 flex items-center gap-1">
+                    <p className="text-xs text-slate-400 flex items-center gap-1">
                       <Clock size={10} />
                       {interview.completedAt
                         ? new Date(interview.completedAt).toLocaleDateString()
@@ -355,8 +355,8 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="text-center py-8">
-            <Mic size={32} className="mx-auto mb-3 text-gray-700" />
-            <p className="text-gray-500 text-sm mb-4">No interviews yet. Start your first one!</p>
+            <Mic size={32} className="mx-auto mb-3 text-slate-300" />
+            <p className="text-slate-500 text-sm mb-4">No interviews yet. Start your first one!</p>
             <Link
               to="/interview/setup"
               className="btn-primary text-sm py-2 px-4 inline-flex items-center gap-2"

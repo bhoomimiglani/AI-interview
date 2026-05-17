@@ -9,7 +9,7 @@ import {
   TrendingUp, BarChart3, Target, Loader2, Award, AlertTriangle, Star,
 } from 'lucide-react';
 
-const COLORS = ['#6366f1', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
+const COLORS = ['#4f46e5', '#16a34a', '#d97706', '#dc2626', '#7c3aed'];
 
 const TOPIC_LABELS: Record<string, string> = {
   behavioral: 'Behavioral', dsa: 'DSA', 'system-design': 'System Design',
@@ -53,7 +53,7 @@ export default function AnalyticsPage() {
   if (loading)
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-primary-400" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
 
@@ -67,13 +67,13 @@ export default function AnalyticsPage() {
     : [];
 
   const scoreColor = (s: number) =>
-    s >= 70 ? 'text-green-400' : s >= 50 ? 'text-yellow-400' : 'text-red-400';
+    s >= 70 ? 'text-green-600' : s >= 50 ? 'text-amber-600' : 'text-red-600';
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Performance Analytics</h1>
-        <p className="text-gray-400 mt-1">Deep dive into your interview performance</p>
+        <h1 className="text-2xl font-bold text-slate-900">Performance Analytics</h1>
+        <p className="text-slate-500 mt-1">Deep dive into your interview performance</p>
       </div>
 
       {/* KPI cards */}
@@ -83,13 +83,13 @@ export default function AnalyticsPage() {
             label: 'Total Sessions',
             value: stats?.totalInterviews || 0,
             icon: BarChart3,
-            color: 'text-blue-400',
+            color: 'text-blue-600',
           },
           {
             label: 'Avg Score',
             value: `${stats?.averageScore || 0}%`,
             icon: Target,
-            color: 'text-primary-400',
+            color: 'text-indigo-600',
           },
           {
             label: 'Improvement',
@@ -97,7 +97,7 @@ export default function AnalyticsPage() {
               ? `${progress.improvementRate > 0 ? '+' : ''}${progress.improvementRate}%`
               : 'N/A',
             icon: TrendingUp,
-            color: 'text-green-400',
+            color: 'text-green-600',
           },
           {
             label: 'Best Score',
@@ -105,13 +105,13 @@ export default function AnalyticsPage() {
               ? `${Math.max(...stats.scoreTrend.map((s) => s.score))}%`
               : 'N/A',
             icon: Award,
-            color: 'text-yellow-400',
+            color: 'text-amber-600',
           },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card">
             <Icon className={`w-5 h-5 ${color} mb-3`} />
-            <div className="text-2xl font-bold text-white">{value}</div>
-            <div className="text-sm text-gray-500 mt-0.5">{label}</div>
+            <div className="text-2xl font-bold text-slate-900">{value}</div>
+            <div className="text-sm text-slate-500 mt-0.5">{label}</div>
           </div>
         ))}
       </div>
@@ -119,36 +119,36 @@ export default function AnalyticsPage() {
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         {/* Score trend */}
         <div className="card">
-          <h2 className="font-semibold text-white mb-4 flex items-center gap-2">
-            <TrendingUp size={16} className="text-primary-400" />
+          <h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <TrendingUp size={16} className="text-indigo-500" />
             Score Trend
           </h2>
           {stats?.scoreTrend && stats.scoreTrend.length > 0 ? (
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={stats.scoreTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-                <XAxis dataKey="session" tick={{ fill: '#6b7280', fontSize: 11 }} />
-                <YAxis domain={[0, 100]} tick={{ fill: '#6b7280', fontSize: 11 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="session" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#111827',
-                    border: '1px solid #374151',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 8,
                   }}
-                  itemStyle={{ color: '#818cf8' }}
+                  itemStyle={{ color: '#4f46e5' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="score"
-                  stroke="#6366f1"
+                  stroke="#4f46e5"
                   strokeWidth={2.5}
-                  dot={{ fill: '#6366f1', r: 4 }}
+                  dot={{ fill: '#4f46e5', r: 4 }}
                   activeDot={{ r: 6 }}
                 />
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-48 flex items-center justify-center text-gray-600 text-sm">
+            <div className="h-48 flex items-center justify-center text-slate-400 text-sm">
               Complete interviews to see your trend
             </div>
           )}
@@ -156,29 +156,29 @@ export default function AnalyticsPage() {
 
         {/* 7-day activity */}
         <div className="card">
-          <h2 className="font-semibold text-white mb-4 flex items-center gap-2">
-            <BarChart3 size={16} className="text-green-400" />
+          <h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <BarChart3 size={16} className="text-green-600" />
             Last 7 Days Activity
           </h2>
           {stats?.last7Days && stats.last7Days.some((d) => d.count > 0) ? (
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={stats.last7Days}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-                <XAxis dataKey="date" tick={{ fill: '#6b7280', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#6b7280', fontSize: 11 }} allowDecimals={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="date" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} allowDecimals={false} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#111827',
-                    border: '1px solid #374151',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 8,
                   }}
-                  itemStyle={{ color: '#22c55e' }}
+                  itemStyle={{ color: '#16a34a' }}
                 />
-                <Bar dataKey="count" fill="#22c55e" radius={[4, 4, 0, 0]} name="Sessions" />
+                <Bar dataKey="count" fill="#16a34a" radius={[4, 4, 0, 0]} name="Sessions" />
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-48 flex items-center justify-center text-gray-600 text-sm">
+            <div className="h-48 flex items-center justify-center text-slate-400 text-sm">
               No activity this week
             </div>
           )}
@@ -188,23 +188,23 @@ export default function AnalyticsPage() {
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         {/* Skill radar */}
         <div className="card">
-          <h2 className="font-semibold text-white mb-4">Skill Radar</h2>
+          <h2 className="font-semibold text-slate-900 mb-4">Skill Radar</h2>
           {radarData.some((d) => d.value > 0) ? (
             <ResponsiveContainer width="100%" height={220}>
               <RadarChart data={radarData}>
-                <PolarGrid stroke="#1f2937" />
-                <PolarAngleAxis dataKey="skill" tick={{ fill: '#9ca3af', fontSize: 11 }} />
+                <PolarGrid stroke="#e2e8f0" />
+                <PolarAngleAxis dataKey="skill" tick={{ fill: '#64748b', fontSize: 11 }} />
                 <Radar
                   name="Score"
                   dataKey="value"
-                  stroke="#6366f1"
-                  fill="#6366f1"
-                  fillOpacity={0.3}
+                  stroke="#4f46e5"
+                  fill="#4f46e5"
+                  fillOpacity={0.2}
                 />
               </RadarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-48 flex items-center justify-center text-gray-600 text-sm">
+            <div className="h-48 flex items-center justify-center text-slate-400 text-sm">
               No data yet
             </div>
           )}
@@ -212,7 +212,7 @@ export default function AnalyticsPage() {
 
         {/* By difficulty */}
         <div className="card">
-          <h2 className="font-semibold text-white mb-4">Performance by Difficulty</h2>
+          <h2 className="font-semibold text-slate-900 mb-4">Performance by Difficulty</h2>
           {stats?.difficultyPerformance && stats.difficultyPerformance.length > 0 ? (
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
@@ -233,15 +233,15 @@ export default function AnalyticsPage() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#111827',
-                    border: '1px solid #374151',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 8,
                   }}
                 />
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-40 flex items-center justify-center text-gray-600 text-sm">
+            <div className="h-40 flex items-center justify-center text-slate-400 text-sm">
               No data yet
             </div>
           )}
@@ -251,21 +251,21 @@ export default function AnalyticsPage() {
       {/* By type */}
       {stats?.typePerformance && stats.typePerformance.length > 0 && (
         <div className="card mb-6">
-          <h2 className="font-semibold text-white mb-4">Performance by Type</h2>
+          <h2 className="font-semibold text-slate-900 mb-4">Performance by Type</h2>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={stats.typePerformance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-              <XAxis dataKey="type" tick={{ fill: '#6b7280', fontSize: 11 }} />
-              <YAxis domain={[0, 100]} tick={{ fill: '#6b7280', fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="type" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+              <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#111827',
-                  border: '1px solid #374151',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #e2e8f0',
                   borderRadius: 8,
                 }}
-                itemStyle={{ color: '#818cf8' }}
+                itemStyle={{ color: '#4f46e5' }}
               />
-              <Bar dataKey="avgScore" fill="#6366f1" radius={[6, 6, 0, 0]} name="Avg Score" />
+              <Bar dataKey="avgScore" fill="#4f46e5" radius={[6, 6, 0, 0]} name="Avg Score" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -274,23 +274,23 @@ export default function AnalyticsPage() {
       {/* Weak topics */}
       {progress?.weakTopics && progress.weakTopics.length > 0 && (
         <div className="card mb-6">
-          <h2 className="font-semibold text-white mb-4 flex items-center gap-2">
-            <AlertTriangle size={16} className="text-yellow-400" />
+          <h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <AlertTriangle size={16} className="text-amber-500" />
             Weak Topics (below 50%)
           </h2>
           <div className="space-y-3">
             {progress.weakTopics.map(({ type, avgScore }) => (
               <div
                 key={type}
-                className="p-4 bg-red-500/5 border border-red-500/20 rounded-xl"
+                className="p-4 bg-red-50 border border-red-200 rounded-xl"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-medium text-white">
+                  <span className="font-medium text-slate-900">
                     {TOPIC_LABELS[type] ?? type}
                   </span>
-                  <span className="text-sm font-bold text-red-400">{avgScore}%</span>
+                  <span className="text-sm font-bold text-red-600">{avgScore}%</span>
                 </div>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-slate-500">
                   💡 {IMPROVEMENT_SUGGESTIONS[type] ?? 'Practice more questions in this topic.'}
                 </p>
               </div>
@@ -301,14 +301,14 @@ export default function AnalyticsPage() {
 
       {/* Best topic */}
       {progress?.bestTopic && (
-        <div className="card mb-6 border border-green-500/20 bg-green-500/5">
+        <div className="card mb-6 border border-green-200 bg-green-50">
           <div className="flex items-center gap-3">
-            <Star size={20} className="text-yellow-400 flex-shrink-0" />
+            <Star size={20} className="text-amber-500 flex-shrink-0" />
             <div>
-              <p className="font-semibold text-white">
+              <p className="font-semibold text-slate-900">
                 Best Topic: {TOPIC_LABELS[progress.bestTopic.type] ?? progress.bestTopic.type}
               </p>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-slate-500">
                 Averaging {progress.bestTopic.avgScore}% — you're excelling here!
               </p>
             </div>
@@ -318,7 +318,7 @@ export default function AnalyticsPage() {
 
       {/* Skill breakdown detail */}
       <div className="card">
-        <h2 className="font-semibold text-white mb-6">Detailed Skill Breakdown</h2>
+        <h2 className="font-semibold text-slate-900 mb-6">Detailed Skill Breakdown</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {stats &&
             [
@@ -341,13 +341,13 @@ export default function AnalyticsPage() {
               <div key={label} className="text-center">
                 <div className="relative w-24 h-24 mx-auto mb-3">
                   <svg className="w-24 h-24 -rotate-90" viewBox="0 0 96 96">
-                    <circle cx="48" cy="48" r="40" fill="none" stroke="#1f2937" strokeWidth="8" />
+                    <circle cx="48" cy="48" r="40" fill="none" stroke="#e2e8f0" strokeWidth="8" />
                     <circle
                       cx="48"
                       cy="48"
                       r="40"
                       fill="none"
-                      stroke={value >= 70 ? '#22c55e' : value >= 50 ? '#f59e0b' : '#ef4444'}
+                      stroke={value >= 70 ? '#16a34a' : value >= 50 ? '#d97706' : '#dc2626'}
                       strokeWidth="8"
                       strokeDasharray={`${2 * Math.PI * 40}`}
                       strokeDashoffset={`${2 * Math.PI * 40 * (1 - value / 100)}`}
@@ -359,8 +359,8 @@ export default function AnalyticsPage() {
                     <span className={`text-xl font-bold ${scoreColor(value)}`}>{value}</span>
                   </div>
                 </div>
-                <div className="font-medium text-white">{label}</div>
-                <div className="text-xs text-gray-500 mt-1">{desc}</div>
+                <div className="font-medium text-slate-900">{label}</div>
+                <div className="text-xs text-slate-500 mt-1">{desc}</div>
               </div>
             ))}
         </div>

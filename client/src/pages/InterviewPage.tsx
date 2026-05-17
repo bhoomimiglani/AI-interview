@@ -115,7 +115,6 @@ export default function InterviewPage() {
       });
       setFeedback(res.data);
 
-      // In challenge mode, auto-advance after brief delay
       if (isChallenge) {
         setTimeout(() => {
           advanceQuestion();
@@ -178,28 +177,28 @@ export default function InterviewPage() {
   if (!currentQuestion)
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-primary-400" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
 
   const timerColor =
-    timeLeft <= 10 ? 'text-red-400' : timeLeft <= 20 ? 'text-yellow-400' : 'text-gray-400';
+    timeLeft <= 10 ? 'text-red-600' : timeLeft <= 20 ? 'text-amber-600' : 'text-slate-500';
   const challengeColor =
     challengeTimeLeft <= 15
-      ? 'text-red-400'
+      ? 'text-red-600'
       : challengeTimeLeft <= 30
-      ? 'text-yellow-400'
-      : 'text-green-400';
+      ? 'text-amber-600'
+      : 'text-green-600';
 
   return (
     <div className="p-4 md:p-6 max-w-2xl mx-auto">
       {/* Challenge mode banner */}
       {isChallenge && (
-        <div className="mb-4 p-3 bg-orange-500/10 border border-orange-500/30 rounded-xl flex items-center justify-between">
+        <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-xl flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Zap size={16} className="text-orange-400" />
-            <span className="text-sm font-semibold text-orange-400">Challenge Mode</span>
-            <span className="text-xs text-gray-400">— Answer as many as possible!</span>
+            <Zap size={16} className="text-orange-500" />
+            <span className="text-sm font-semibold text-orange-700">Challenge Mode</span>
+            <span className="text-xs text-slate-500">— Answer as many as possible!</span>
           </div>
           <div className={`font-mono font-bold text-lg ${challengeColor}`}>
             {challengeTimeLeft}s
@@ -209,12 +208,12 @@ export default function InterviewPage() {
 
       {/* Progress bar */}
       <div className="mb-6">
-        <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+        <div className="flex items-center justify-between text-sm text-slate-500 mb-2">
           <span>
             Question {currentIdx + 1} of {questions.length}
           </span>
           <div className="flex items-center gap-3">
-            <span className="capitalize badge bg-gray-800 text-gray-300">
+            <span className="capitalize badge bg-slate-100 text-slate-600">
               {currentQuestion.type}
             </span>
             {!feedback && !isChallenge && (
@@ -225,9 +224,9 @@ export default function InterviewPage() {
             )}
           </div>
         </div>
-        <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+        <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
           <div
-            className="h-full bg-primary-500 rounded-full transition-all duration-500"
+            className="h-full bg-indigo-500 rounded-full transition-all duration-500"
             style={{
               width: `${((currentIdx + (feedback ? 1 : 0)) / questions.length) * 100}%`,
             }}
@@ -236,7 +235,7 @@ export default function InterviewPage() {
       </div>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 mb-4 text-sm text-red-400 flex items-center gap-2">
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-sm text-red-600 flex items-center gap-2">
           <AlertCircle size={14} /> {error}
         </div>
       )}
@@ -247,35 +246,35 @@ export default function InterviewPage() {
           <span
             className={`badge ${
               currentQuestion.difficulty === 'easy'
-                ? 'bg-green-500/10 text-green-400'
+                ? 'bg-green-100 text-green-700'
                 : currentQuestion.difficulty === 'medium'
-                ? 'bg-yellow-500/10 text-yellow-400'
-                : 'bg-red-500/10 text-red-400'
+                ? 'bg-amber-100 text-amber-700'
+                : 'bg-red-100 text-red-700'
             }`}
           >
             {currentQuestion.difficulty}
           </span>
-          <span className="badge bg-gray-800 text-gray-400">{currentQuestion.category}</span>
+          <span className="badge bg-slate-100 text-slate-600">{currentQuestion.category}</span>
         </div>
-        <p className="text-white text-lg leading-relaxed font-medium">{currentQuestion.text}</p>
+        <p className="text-slate-900 text-lg leading-relaxed font-medium">{currentQuestion.text}</p>
       </div>
 
       {/* Options */}
       <div className="space-y-3 mb-6">
         {currentQuestion.options.map((option, idx) => {
           let style =
-            'bg-gray-900 border-gray-800 hover:border-gray-600 cursor-pointer';
+            'bg-white border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 cursor-pointer';
 
           if (feedback) {
             if (idx === feedback.correctOptionIndex) {
-              style = 'bg-green-500/10 border-green-500 cursor-default';
+              style = 'bg-green-50 border-green-400 cursor-default';
             } else if (idx === feedback.selectedOptionIndex && !feedback.isCorrect) {
-              style = 'bg-red-500/10 border-red-500 cursor-default';
+              style = 'bg-red-50 border-red-400 cursor-default';
             } else {
-              style = 'bg-gray-900 border-gray-800 opacity-50 cursor-default';
+              style = 'bg-white border-slate-200 opacity-50 cursor-default';
             }
           } else if (selectedOption === idx) {
-            style = 'bg-primary-600/20 border-primary-500 cursor-pointer';
+            style = 'bg-indigo-50 border-indigo-400 cursor-pointer';
           }
 
           return (
@@ -292,10 +291,10 @@ export default function InterviewPage() {
                       ? 'bg-green-500 text-white'
                       : idx === feedback.selectedOptionIndex && !feedback.isCorrect
                       ? 'bg-red-500 text-white'
-                      : 'bg-gray-800 text-gray-500'
+                      : 'bg-slate-100 text-slate-400'
                     : selectedOption === idx
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-800 text-gray-400'
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-slate-100 text-slate-500'
                 }`}
               >
                 {String.fromCharCode(65 + idx)}
@@ -305,23 +304,23 @@ export default function InterviewPage() {
                 className={`text-sm flex-1 ${
                   feedback
                     ? idx === feedback.correctOptionIndex
-                      ? 'text-green-300 font-medium'
+                      ? 'text-green-700 font-medium'
                       : idx === feedback.selectedOptionIndex && !feedback.isCorrect
-                      ? 'text-red-300'
-                      : 'text-gray-500'
+                      ? 'text-red-700'
+                      : 'text-slate-400'
                     : selectedOption === idx
-                    ? 'text-white font-medium'
-                    : 'text-gray-300'
+                    ? 'text-slate-900 font-medium'
+                    : 'text-slate-700'
                 }`}
               >
                 {option.text}
               </span>
 
               {feedback && idx === feedback.correctOptionIndex && (
-                <CheckCircle size={18} className="text-green-400 flex-shrink-0" />
+                <CheckCircle size={18} className="text-green-500 flex-shrink-0" />
               )}
               {feedback && idx === feedback.selectedOptionIndex && !feedback.isCorrect && (
-                <XCircle size={18} className="text-red-400 flex-shrink-0" />
+                <XCircle size={18} className="text-red-500 flex-shrink-0" />
               )}
             </button>
           );
@@ -333,31 +332,31 @@ export default function InterviewPage() {
         <div
           className={`card mb-4 border ${
             feedback.isCorrect
-              ? 'border-green-500/30 bg-green-500/5'
-              : 'border-red-500/30 bg-red-500/5'
+              ? 'border-green-300 bg-green-50'
+              : 'border-red-300 bg-red-50'
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
             {feedback.isCorrect ? (
-              <CheckCircle size={18} className="text-green-400" />
+              <CheckCircle size={18} className="text-green-600" />
             ) : (
-              <XCircle size={18} className="text-red-400" />
+              <XCircle size={18} className="text-red-600" />
             )}
             <span
               className={`font-semibold ${
-                feedback.isCorrect ? 'text-green-400' : 'text-red-400'
+                feedback.isCorrect ? 'text-green-700' : 'text-red-700'
               }`}
             >
               {feedback.isCorrect ? 'Correct!' : 'Incorrect'}
             </span>
           </div>
           {!feedback.isCorrect && (
-            <p className="text-sm text-gray-400 mb-2">
+            <p className="text-sm text-slate-600 mb-2">
               Correct answer:{' '}
-              <span className="text-green-400 font-medium">{feedback.correctOptionText}</span>
+              <span className="text-green-700 font-medium">{feedback.correctOptionText}</span>
             </p>
           )}
-          <p className="text-sm text-gray-300 leading-relaxed">{feedback.explanation}</p>
+          <p className="text-sm text-slate-700 leading-relaxed">{feedback.explanation}</p>
         </div>
       )}
 

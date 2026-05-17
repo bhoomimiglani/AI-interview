@@ -20,18 +20,18 @@ const stats = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Nav */}
-      <nav className="border-b border-gray-800/50 backdrop-blur-sm sticky top-0 z-10 bg-gray-950/80">
+      <nav className="border-b border-slate-200 backdrop-blur-sm sticky top-0 z-10 bg-white/90">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-              <Brain className="w-4.5 h-4.5 text-white" size={18} />
+            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <Brain className="text-white" size={18} />
             </div>
-            <span className="font-bold text-white">AI Interview Prep</span>
+            <span className="font-bold text-slate-900">AI Interview Prep</span>
           </div>
           <div className="flex items-center gap-3">
-            <Link to="/login" className="text-gray-400 hover:text-white text-sm font-medium transition-colors">
+            <Link to="/login" className="text-slate-500 hover:text-slate-900 text-sm font-medium transition-colors">
               Sign in
             </Link>
             <Link to="/register" className="btn-primary text-sm py-2 px-4">
@@ -43,15 +43,15 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-4 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-primary-600/10 border border-primary-500/20 rounded-full px-4 py-1.5 text-sm text-primary-400 mb-6">
+        <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-200 rounded-full px-4 py-1.5 text-sm text-indigo-600 mb-6">
           <Zap size={14} />
-          Powered by GPT-4 & Whisper AI
+          Powered by GPT-4 &amp; Whisper AI
         </div>
-        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
           Ace Your Next Interview<br />
           <span className="gradient-text">With AI Coaching</span>
         </h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+        <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-10">
           Practice mock interviews with voice input, get instant AI feedback, and track your performance with detailed analytics. Built for 2026 job seekers.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -65,11 +65,11 @@ export default function LandingPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t border-gray-800">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t border-slate-200">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="text-3xl font-bold text-white">{s.value}</div>
-              <div className="text-sm text-gray-500 mt-1">{s.label}</div>
+              <div className="text-3xl font-bold text-slate-900">{s.value}</div>
+              <div className="text-sm text-slate-500 mt-1">{s.label}</div>
             </div>
           ))}
         </div>
@@ -78,17 +78,17 @@ export default function LandingPage() {
       {/* Features */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">Everything You Need to Prepare</h2>
-          <p className="text-gray-400 max-w-xl mx-auto">A complete interview preparation toolkit powered by the latest AI technology.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Everything You Need to Prepare</h2>
+          <p className="text-slate-500 max-w-xl mx-auto">A complete interview preparation toolkit powered by the latest AI technology.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="card hover:border-primary-500/30 transition-all group">
-              <div className="w-10 h-10 bg-primary-600/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-600/30 transition-colors">
-                <Icon className="w-5 h-5 text-primary-400" />
+            <div key={title} className="card hover:border-indigo-300 hover:shadow-md transition-all group">
+              <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-100 transition-colors">
+                <Icon className="w-5 h-5 text-indigo-600" />
               </div>
-              <h3 className="font-semibold text-white mb-2">{title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{desc}</p>
+              <h3 className="font-semibold text-slate-900 mb-2">{title}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
@@ -97,7 +97,7 @@ export default function LandingPage() {
       {/* How it works */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">How It Works</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">How It Works</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {[
@@ -106,9 +106,9 @@ export default function LandingPage() {
             { step: '03', title: 'Get AI Feedback', desc: 'Receive instant detailed feedback with scores, strengths, improvements, and key points analysis.' },
           ].map(({ step, title, desc }) => (
             <div key={step} className="text-center">
-              <div className="text-5xl font-bold text-primary-600/30 mb-4">{step}</div>
-              <h3 className="font-semibold text-white mb-2">{title}</h3>
-              <p className="text-sm text-gray-400">{desc}</p>
+              <div className="text-5xl font-bold text-indigo-200 mb-4">{step}</div>
+              <h3 className="font-semibold text-slate-900 mb-2">{title}</h3>
+              <p className="text-sm text-slate-500">{desc}</p>
             </div>
           ))}
         </div>
@@ -116,18 +116,18 @@ export default function LandingPage() {
 
       {/* CTA */}
       <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="bg-gradient-to-r from-primary-900/50 to-purple-900/30 border border-primary-500/20 rounded-3xl p-12 text-center">
+        <div className="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-12 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Land Your Dream Job?</h2>
-          <p className="text-gray-400 mb-8 max-w-lg mx-auto">Join thousands of developers who improved their interview skills with AI-powered practice.</p>
+          <p className="text-indigo-100 mb-8 max-w-lg mx-auto">Join thousands of developers who improved their interview skills with AI-powered practice.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
             {['No credit card required', 'Free to start', 'Cancel anytime'].map((item) => (
-              <div key={item} className="flex items-center gap-2 text-sm text-gray-400">
-                <CheckCircle size={14} className="text-green-400" />
+              <div key={item} className="flex items-center gap-2 text-sm text-indigo-100">
+                <CheckCircle size={14} className="text-white" />
                 {item}
               </div>
             ))}
           </div>
-          <Link to="/register" className="btn-primary inline-flex items-center gap-2 text-base py-3 px-8">
+          <Link to="/register" className="inline-flex items-center gap-2 text-base py-3 px-8 bg-white text-indigo-600 font-semibold rounded-xl hover:bg-indigo-50 transition-all">
             Get Started Free
             <ArrowRight size={18} />
           </Link>
@@ -135,8 +135,8 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-8 text-center text-sm text-gray-600">
-        <p>© 2026 AI Interview Prep Platform. Built with React, Node.js, MongoDB & OpenAI.</p>
+      <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-400">
+        <p>© 2026 AI Interview Prep Platform. Built with React, Node.js, MongoDB &amp; OpenAI.</p>
       </footer>
     </div>
   );

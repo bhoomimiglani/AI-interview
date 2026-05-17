@@ -27,11 +27,11 @@ export default function Layout() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-950 overflow-hidden">
+    <div className="flex h-screen bg-slate-50 overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-20 lg:hidden"
+          className="fixed inset-0 bg-black/30 z-20 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -39,22 +39,22 @@ export default function Layout() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:static inset-y-0 left-0 z-30 w-64 bg-gray-900 border-r border-gray-800
+          fixed lg:static inset-y-0 left-0 z-30 w-64 bg-white border-r border-slate-200
           flex flex-col transition-transform duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-800">
-          <div className="w-9 h-9 bg-primary-600 rounded-xl flex items-center justify-center">
+        <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-200">
+          <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
             <Brain className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-white text-sm">AI Interview</h1>
-            <p className="text-xs text-gray-500">Prep Platform</p>
+            <h1 className="font-bold text-slate-900 text-sm">AI Interview</h1>
+            <p className="text-xs text-slate-500">Prep Platform</p>
           </div>
           <button
-            className="ml-auto lg:hidden text-gray-400 hover:text-white"
+            className="ml-auto lg:hidden text-slate-400 hover:text-slate-700"
             onClick={() => setSidebarOpen(false)}
           >
             <X className="w-5 h-5" />
@@ -71,8 +71,8 @@ export default function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group ${
                   isActive
-                    ? 'bg-primary-600/20 text-primary-400 border border-primary-500/30'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`
               }
             >
@@ -87,19 +87,19 @@ export default function Layout() {
         </nav>
 
         {/* User section */}
-        <div className="px-3 py-4 border-t border-gray-800">
+        <div className="px-3 py-4 border-t border-slate-200">
           <div className="flex items-center gap-3 px-3 py-2 mb-2">
-            <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+            <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-white truncate">{user?.name}</p>
-              <p className="text-xs text-gray-500 truncate">{user?.targetRole}</p>
+              <p className="text-sm font-medium text-slate-900 truncate">{user?.name}</p>
+              <p className="text-xs text-slate-500 truncate">{user?.targetRole}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-all"
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all"
           >
             <LogOut size={16} />
             Sign out
@@ -110,16 +110,16 @@ export default function Layout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Mobile header */}
-        <header className="lg:hidden flex items-center gap-3 px-4 py-3 bg-gray-900 border-b border-gray-800">
+        <header className="lg:hidden flex items-center gap-3 px-4 py-3 bg-white border-b border-slate-200">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="text-gray-400 hover:text-white"
+            className="text-slate-500 hover:text-slate-900"
           >
             <Menu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-2">
-            <Brain className="w-5 h-5 text-primary-400" />
-            <span className="font-bold text-white text-sm">AI Interview Prep</span>
+            <Brain className="w-5 h-5 text-indigo-600" />
+            <span className="font-bold text-slate-900 text-sm">AI Interview Prep</span>
           </div>
         </header>
 
